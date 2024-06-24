@@ -11,7 +11,7 @@ o = ["  .----.  ", " /      \ ", " \      / ", "  '----'  "]
 
 display = [x,o]
 
-def gui_for_terminal(position, X_or_O):
+def gui_for_terminal(memo, position, X_or_O, time_com):
     os.system('cls' if os.name == 'nt' else 'clear')
     print("\n-------- Tic-Tac-Toe! ---------\n")
     memo[position] = X_or_O
@@ -48,10 +48,16 @@ def gui_for_terminal(position, X_or_O):
     if X_or_O:
         print(f"Previous:  position({position})    player({'X' if X_or_O!=2 else 'O'})")
     else:
-        print(f"Previous:  position({position})    Clearing")
+        print(f"Previous:  position({position})    ------- Clearing ------")
 
-    print("Player(X)'s turn "if X_or_O==2 else "Player(O)'s turn \n")
+    print("Player(X)'s turn "if X_or_O==2 else "Player(O)'s turn ")
+    t = int(time_com//3.3)
+    print(f"Test is {time_com}% completed")
+    print(f"+-{'-'*30}-+")
+    print(f"| {'#'*t}{' '*(30-t)} |")
+    print(f"+-{'-'*30}-+")
 
+    return memo
 
 
 
