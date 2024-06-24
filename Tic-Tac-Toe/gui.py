@@ -1,3 +1,5 @@
+
+import time
 import os
 
 
@@ -46,9 +48,9 @@ def gui_for_terminal(memo, position, X_or_O, time_com):
 
     print("\n"+"_"*32+"\n")
     if X_or_O:
-        print(f"Previous:  position({position})    player({'X' if X_or_O!=2 else 'O'})")
+        print(f"Previous:  position({position})  player({'X' if X_or_O!=2 else 'O'})")
     else:
-        print(f"Previous:  position({position})    ------- Clearing ------")
+        print(f"Previous:  position({position})  --------")
 
     print("Player(X)'s turn "if X_or_O==2 else "Player(O)'s turn ")
     t = int(time_com//3.3)
@@ -58,8 +60,5 @@ def gui_for_terminal(memo, position, X_or_O, time_com):
     print(f"+-{'-'*30}-+")
 
     return memo
-
-
-
 
 
