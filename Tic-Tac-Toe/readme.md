@@ -1,32 +1,35 @@
-``` python
-from gui import gui_for_terminal
-import time
-from random import randint
-
-count = 1
-y = 1
-while True:
-    x = randint(1,10)
-    if x == 10:
-        for i in range(1,10):
-            gui_for_terminal(i, 0)
-            time.sleep(0.01)
 
 
-    gui_for_terminal(x, randint(1,2))
-    count += 1
-    y += 1
-    if y == 3:
-        y = 1
-    if count == 9:
-        1
-    time.sleep(0.5)
+## This project has not been completed yet...
 
-```
+``` shell
 
-### Hello world!..
+-------- Tic-Tac-Toe! ---------
 
-``` html
-<h1>Hello world!</h1>
+  \    /  |          |  .----.
+    \/    |          | /      \
+    /\    |          | \      /
+  /    \  |          |  '----'
+----------+----------+----------
+          |  \    /  |
+          |    \/    |
+          |    /\    |
+          |  /    \  |
+----------+----------+----------
+  .----.  |  .----.  |  \    /
+ /      \ | /      \ |    \/
+ \      / | \      / |    /\
+  '----'  |  '----'  |  /    \
+
+________________________________
+
+Winner is X
+
+Test is 99.01% completed
+Win rate :
+X = 44.55%,
+O = 43.02%,
+Draw = 12.43%
+Average time is 0.087 milliseconds
 ```
 
