@@ -90,7 +90,12 @@ def starter(time_com, who_start, gui=True, player_mode=False):
 
 
 
-def test_bench(times, gui_on, player=False):
+def test_bench(player=False):
+    gui_on = int(input("Gui 1 or 0: "))
+    times = int(input())
+    if gui_on:
+        player = int(input())
+
     win = [0]*times
     t = times/100
     who_start = 1
@@ -120,10 +125,7 @@ def test_bench(times, gui_on, player=False):
 
 
 # starter()
-gui_on = int(input("Gui 1 or 0: "))
-times = int(input())
-if gui_on:
-    player = int(input())
 
-test_bench(times, gui_on, player=0)
+
+test_bench()
 
