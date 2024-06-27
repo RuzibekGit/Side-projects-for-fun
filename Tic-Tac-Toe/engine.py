@@ -7,7 +7,7 @@ import time
 
 
 
-def check_win_or_draw(memo, assembl, time_com, wining_con=True) -> int:
+def check_win_or_draw(memo, assemble, time_com, wining_con=True) -> int:
 
     win_pos = {
         2: [[1, 2, 3]],
@@ -28,7 +28,7 @@ def check_win_or_draw(memo, assembl, time_com, wining_con=True) -> int:
                         for pos in position:
                             memo[pos] = x
                         os.system('cls' if os.name == 'nt' else 'clear')
-                        print(gui_for_terminal_1(memo, assembl, time_com))
+                        print(gui_for_terminal_1(memo, assemble, time_com))
                         print(f"Winner is {'X' if maybe[0] == 1 else 'O'}")
 
                         sleep(0.1)
@@ -43,7 +43,7 @@ def check_win_or_draw(memo, assembl, time_com, wining_con=True) -> int:
                 for pos in range(1,10):
                     memo[pos] = s[pos] if i % 2 == 0 else 0
                 os.system('cls' if os.name == 'nt' else 'clear')
-                print(gui_for_terminal_1(memo, assembl, time_com))
+                print(gui_for_terminal_1(memo, assemble, time_com))
                 print("Draw!...")
 
                 sleep(0.1)
@@ -51,6 +51,7 @@ def check_win_or_draw(memo, assembl, time_com, wining_con=True) -> int:
         return 3
     # -------------------------------------
     return 0
+# fixed
 
 # @speedometer
 def starter(time_com, who_start, gui=True, player_mode=False):
@@ -60,10 +61,11 @@ def starter(time_com, who_start, gui=True, player_mode=False):
             4: 0, 5: 0, 6: 0, 
             7: 0, 8: 0, 9: 0}
     
-    assembl = assembly()
+    assemble = assembly()
     pos = {1,2,3,4,5,6,7,8,9}
     player = who_start
 
+    # ------------- Game Loop ---------------
     while True:
         if player_mode and player == player_mode:
             
@@ -79,13 +81,14 @@ def starter(time_com, who_start, gui=True, player_mode=False):
         if gui:
             os.system(clear_win)
 
-            print(gui_for_terminal_1(memo, assembl, time_com))
+            print(gui_for_terminal_1(memo, assemble, time_com))
             print(f"Previous:  position({r})  player({'X' if player!=2 else 'O'})")
             
             sleep(0.2)
 
-        if (winner := check_win_or_draw(memo,assembl, time_com, wining_con=gui)):
+        if (winner := check_win_or_draw(memo,assemble, time_com, wining_con=gui)):
             return winner
+    # -----------------------------------------
 
 
 
@@ -99,33 +102,34 @@ def test_bench(player=False):
     win = [0]*times
     t = times/100
     who_start = 1
-    start_time = time.time()
-    for i in range(times):
-        if who_start == 3: who_start = 1
-        time_com = round((i+1)/t, 3)
-        s = starter(time_com,who_start, gui=gui_on, player_mode=player)
-        win[i] = s
-        who_start += 1
 
+    start_time = time.time()
+    # -------- Test Bench Loop --------
+    for i in range(times):
+        who_start = 1 if who_start == 2 else 2
+        time_com = round((i+1)/t, 3)
+
+        win[i] = starter(time_com,who_start, gui=gui_on, player_mode=player)
 
         if i%(times/100)==0: 
             print(f"Test is {time_com}% completed", end='\r')
+    # ---------------------------------
 
-    end_time = time.time()
-    elapsed_time = end_time - start_time
-    average = elapsed_time/times
+    end_time     = time.time()
+    overall_time = end_time - start_time
+    average      = overall_time/times 
 
-        
+    X    = round(win.count(1)/t,3)
+    O    = round(win.count(2)/t,3)
+    DRAW = round(win.count(3)/t,3)
 
-    X = round(win.count(1)/t,3)
-    O = round(win.count(2)/t,3)
-    draw = round(win.count(3)/t,3)
-    print(f"\nWin rate : \nX = {X}%,  \nO = {O}%, \nDraw = {draw}%")
+    print(f"\nWin rate : \nX = {X}%,  \nO = {O}%, \nDraw = {DRAW}%")
+
     print(f"Average time is {round(average*1000,3)} milliseconds")
 
 
 # starter()
 
-
-test_bench()
+if __name__ == "__main__":
+    test_bench()
 

@@ -34,6 +34,14 @@ def assembly():
 
 def gui_for_terminal_1(memo, assembly,  time_com):
 
+    # def changer(values): #TODO
+    #     for ind, pos in enumerate(memo_pos[i]):
+    #         next = ""
+    #         if (pos+1) % 5 == 0:
+    #             next = "\n"
+
+    #         display[pos] = values+next
+
     display, memo_pos = assembly
     for i, v in memo.items():
         if v:
